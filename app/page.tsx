@@ -4,6 +4,7 @@ import NextLink from "next/link";
 import { Button } from '@/components/ui/button';
 import { Zap, Shield, Cpu, Rocket, ArrowRight, Brain, Code, Bot, Sparkles } from 'lucide-react';
 import Layout from '@/components/Layout';
+import { motion } from "framer-motion";
 
 const valueProps = [
   {
@@ -31,145 +32,174 @@ const valueProps = [
 export default function Home() {
   return (
     <Layout>
-      {/* Hero Section - Centered with High-Visibility Circuit Background */}
-      <section className="relative pt-10 pb-16 flex items-center justify-center overflow-hidden bg-background">
-        {/* Background Image with Overlay - Fixed Opacity for visibility */}
+      {/* Hero Section - The "Control Center" Reveal */}
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-[#020202]">
+        {/* Technical Background */}
         <div className="absolute inset-0 z-0">
-          <img
-            src="/hero-bg.jpg"
-            alt="Cyber Circuit Background"
-            className="w-full h-full object-cover opacity-35"
-          />
-          {/* Lightened overlay to let the circuit patterns show */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/20 to-background" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:60px_60px]" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-primary/5 blur-[120px] rounded-full opacity-50" />
         </div>
 
-        {/* Glow Effects matching About Page Hero logic */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[150px] pointer-events-none" />
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="flex flex-col items-center text-center">
+            {/* Animated Status Badge */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-md mb-8"
+            >
+              <div className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+              </div>
+              <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-primary">
+                System_Status: Optimal
+              </span>
+            </motion.div>
 
-        <div className="container mx-auto px-6 relative pb-20 z-10 text-center">
-          <div className="max-w-4xl mx-auto">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/5 text-primary text-sm font-medium mb-8 animate-fade-up shadow-[0_0_15px_rgba(0,229,229,0.2)]">
-              <Sparkles size={16} />
-              <span>Next-Generation Digital Solutions</span>
-            </div>
+            {/* Cinematic Headline */}
+            <motion.h1 
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8 }}
+              className="text-6xl md:text-8xl font-black text-white tracking-tighter leading-[0.9] mb-8"
+            >
+              WE BUILD WEBSITES <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary/80 to-primary/40">
+                THAT THINK.
+              </span>
+            </motion.h1>
 
-            {/* Headline */}
-            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-8 leading-tight animate-fade-up delay-100">
-              We Build Websites{' '}
-              <span className="text-gradient">That Think.</span>
-            </h1>
-
-            {/* Sub-headline */}
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed animate-fade-up delay-200">
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed mb-12"
+            >
               Transform your business with AI-powered automation, intelligent systems,
               and digital products that work smarter so you can scale faster.
-            </p>
+            </motion.p>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up delay-300">
-              <Button variant="glow" size="xl" asChild>
+            {/* High-Contrast Action Hub */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              className="flex flex-col sm:flex-row items-center gap-6"
+            >
+              <Button variant="glow" size="xl" asChild className="rounded-2xl px-10 h-16 text-lg font-bold shadow-[0_0_40px_rgba(var(--primary),0.3)]">
                 <NextLink href="/contact" className="gap-3">
-                  Get a Free Audit
-                  <ArrowRight size={20} />
+                  Get a Free Audit <ArrowRight size={20} />
                 </NextLink>
               </Button>
-              <Button variant="heroOutline" size="xl" asChild>
+              <Button variant="heroOutline" size="xl" asChild className="rounded-2xl px-10 h-16 text-lg border-white/10 hover:bg-white/5">
                 <NextLink href="/contact">Contact Us</NextLink>
               </Button>
-            </div>
-
-            {/* Trust Indicators */}
-            <div className="mt-16 flex flex-wrap items-center justify-center gap-8 text-muted-foreground text-sm animate-fade-up delay-400">
-              {["AI-First Approach", "Enterprise Ready", "24/7 Support"].map((text) => (
-                <div key={text} className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                  <span>{text}</span>
-                </div>
-              ))}
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Value Props Section */}
-      <section className="py-24 relative bg-background">
-        <div className="container mx-auto px-6 text-center">
-          <div className="mb-16">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Built for the <span className="text-gradient">Future</span>
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Every solution we deliver is engineered with tomorrow in mind.
+      {/* Value Props - The "Technical Specifications" Grid */}
+      <section className="py-32 relative bg-[#050505]">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+            <div className="space-y-4">
+              <div className="flex items-center gap-2">
+                <span className="w-8 h-[1px] bg-primary" />
+                <span className="text-primary font-mono text-xs uppercase tracking-widest">Core Infrastructure</span>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
+                Built for the <span className="italic text-slate-500">Future</span>
+              </h2>
+            </div>
+            <p className="text-slate-500 max-w-sm font-mono text-sm leading-relaxed">
+              {"//"} Every solution we deliver is engineered with tomorrow in mind. Standard protocols applied.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {valueProps.map((prop, index) => (
               <div
                 key={prop.title}
-                className="group p-8 rounded-2xl bg-secondary/30 border border-border hover:border-primary/50 transition-all duration-500 hover:shadow-[0_0_30px_rgba(0,229,229,0.1)]"
-                style={{ animationDelay: `${index * 100}ms` }}
+                className="group relative p-8 rounded-3xl bg-white/[0.02] border border-white/5 hover:border-primary/40 transition-all duration-500 overflow-hidden"
               >
-                <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 mx-auto group-hover:bg-primary/20 transition-colors duration-300">
-                  <prop.icon className="w-7 h-7 text-primary" />
+                <div className="relative z-10">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <prop.icon className="w-6 h-6 text-primary" />
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-3 tracking-tight">{prop.title}</h3>
+                  <p className="text-slate-500 text-sm leading-relaxed">{prop.description}</p>
                 </div>
-                <h3 className="font-display text-xl font-semibold text-foreground mb-3">{prop.title}</h3>
-                <p className="text-muted-foreground leading-relaxed text-sm">{prop.description}</p>
+                {/* Subtle Background Number */}
+                <span className="absolute -bottom-4 -right-2 text-6xl font-black text-white/[0.03] group-hover:text-primary/5 transition-colors">
+                  0{index + 1}
+                </span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Why Nexe-Agent Section */}
-      <section className="py-24 bg-card/30 border-y border-border">
+      {/* Why Nexe-Agent - The "Split-System" View */}
+      <section className="py-32 bg-[#020202] border-y border-white/5">
         <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="text-center lg:text-left">
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-6">
-                Why <span className="text-gradient">Nexe-Agent</span>?
-              </h2>
-              <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-                We are not just developers. We are strategic partners who understand that
-                technology should serve your business goals, not complicate them.
-              </p>
-              <div className="space-y-4 mb-10 inline-block lg:block text-left">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+            <div className="space-y-10">
+              <div className="space-y-4">
+                <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tighter">
+                  Why <span className="text-primary underline underline-offset-8 decoration-1">Nexe-Agent</span>?
+                </h2>
+                <p className="text-slate-400 text-lg leading-relaxed">
+                  We are not just developers. We are strategic partners who understand that
+                  technology should serve your business goals.
+                </p>
+              </div>
+
+              <div className="space-y-6">
                 {[
                   { icon: Code, text: "Custom solutions tailored to your exact needs" },
                   { icon: Bot, text: "AI integration that actually adds value" },
                   { icon: Cpu, text: "Scalable architecture from day one" },
-                ].map((item) => (
-                  <div key={item.text} className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <item.icon className="w-5 h-5 text-primary" />
+                ].map((item, i) => (
+                  <motion.div 
+                    whileHover={{ x: 10 }}
+                    key={item.text} 
+                    className="flex items-center gap-5 p-4 rounded-2xl bg-white/[0.03] border border-white/5"
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                      <item.icon size={20} />
                     </div>
-                    <span className="text-foreground">{item.text}</span>
-                  </div>
+                    <span className="text-slate-200 font-medium">{item.text}</span>
+                  </motion.div>
                 ))}
               </div>
-              <div className="block">
-                <Button variant="hero" size="lg" asChild>
-                  <NextLink href="/about" className="gap-2 mx-auto lg:mx-0">
-                    Learn More About Us <ArrowRight size={18} />
-                  </NextLink>
-                </Button>
-              </div>
+
+              <Button variant="hero" size="lg" asChild className="rounded-xl px-8 h-14 font-bold">
+                <NextLink href="/about" className="gap-2">
+                  Learn More About Us <ArrowRight size={18} />
+                </NextLink>
+              </Button>
             </div>
 
-            <div className="relative">
-              <div className="aspect-square rounded-3xl bg-gradient-to-br from-secondary/50 to-card border border-border p-8 flex items-center justify-center overflow-hidden">
-                <div className="relative w-full h-full">
-                  <div className="absolute top-8 left-8 w-20 h-20 rounded-2xl bg-primary/20 border border-primary/30 flex items-center justify-center animate-float">
-                    <Brain className="w-10 h-10 text-primary" />
-                  </div>
-                  <div className="absolute bottom-8 right-8 w-24 h-24 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center animate-float delay-400">
-                    <Zap className="w-12 h-12 text-primary" />
-                  </div>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-32 h-32 rounded-full bg-primary/20 blur-2xl animate-pulse-glow" />
-                  </div>
+            {/* Interactive Visual Element */}
+            <div className="relative group">
+              <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full opacity-20 group-hover:opacity-40 transition-opacity" />
+              <div className="relative aspect-square rounded-[3rem] bg-gradient-to-br from-white/10 to-transparent border border-white/10 p-1 flex items-center justify-center">
+                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20" />
+                <div className="w-full h-full rounded-[2.8rem] bg-[#050505] flex items-center justify-center relative overflow-hidden">
+                  {/* Rotating Tech Rings */}
+                  <motion.div 
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                    className="absolute w-64 h-64 border border-dashed border-primary/30 rounded-full"
+                  />
+                  <motion.div 
+                    animate={{ rotate: -360 }}
+                    transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                    className="absolute w-80 h-80 border border-dotted border-white/10 rounded-full"
+                  />
+                  <Brain className="w-20 h-20 text-primary animate-pulse" />
                 </div>
               </div>
             </div>
@@ -177,22 +207,30 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Final CTA Section */}
-      <section className="py-24 relative overflow-hidden bg-background">
-        <div className="absolute inset-0 bg-hero-glow opacity-50 pointer-events-none" />
+      {/* Final CTA - The "Terminal Shutdown" Aesthetic */}
+      <section className="py-40 relative overflow-hidden bg-[#050505]">
         <div className="container mx-auto px-6 relative z-10 text-center">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-6">
-            Ready to Build Something <span className="text-gradient">Intelligent</span>?
-          </h2>
-          <p className="text-muted-foreground text-lg mb-10 max-w-2xl mx-auto">
-            Let us analyze your business and show you exactly how AI and automation
-            can transform your operations. No obligations, just insights.
-          </p>
-          <Button variant="glow" size="xl" asChild>
-            <NextLink href="/contact" className="gap-3">
-              Get Your Free Audit <ArrowRight size={20} />
-            </NextLink>
-          </Button>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="max-w-3xl mx-auto space-y-8"
+          >
+            <h2 className="text-4xl md:text-7xl font-bold text-white tracking-tighter">
+              READY TO BUILD <br />
+              <span className="text-slate-500 italic">INTELLIGENT?</span>
+            </h2>
+            <p className="text-slate-400 text-lg max-w-xl mx-auto">
+              Let us analyze your business and show you exactly how AI and automation
+              can transform your operations.
+            </p>
+            <div className="pt-8">
+                <Button variant="glow" size="xl" asChild className="rounded-full px-12 h-16 text-lg font-bold">
+                    <NextLink href="/contact" className="gap-3">
+                        Get Your Free Audit <ArrowRight size={20} />
+                    </NextLink>
+                </Button>
+            </div>
+          </motion.div>
         </div>
       </section>
     </Layout>
